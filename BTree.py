@@ -8,15 +8,15 @@ class BTree:
     def __init__(self):
         self.root=node()
     def search(self,data1):
-        self._search(data1,self.root)
+        return(self._search(data1,self.root))
     def _search(self,data2,curr):
         for i in curr.keys:
             if i<data2:
                 pass
             elif i==data2:
-                return(curr.keys[i])
+                return(curr,curr.keys.index(i))
             else:
-                return(self._search(data2,curr.children[i]))
+                return(self._search(data2,curr.children[curr.keys.index(i)]))
     def _ins_srch(self,data4,curr):
         if curr.leaf is True:
             return(curr)
@@ -78,9 +78,10 @@ b1.insert(0)
 b1.insert(11)
 b1.insert(4.5)
 b1.insert(12)
-print(b1.root.keys)
-x=b1.root.children[0]
-y=b1.root.children[1]
-z=b1.root.children[2]
-w=b1.root.children[3]
-print(x.keys+['/']+y.keys+['/']+z.keys+['/']+w.keys)
+#print(b1.root.keys)
+#x=b1.root.children[0]
+#y=b1.root.children[1]
+#z=b1.root.children[2]
+#w=b1.root.children[3]
+#print(x.keys+['/']+y.keys+['/']+z.keys+['/']+w.keys)
+
