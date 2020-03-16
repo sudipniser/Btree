@@ -12,7 +12,8 @@ class BTree:
     def _search(self,data2,curr):
         for i in curr.keys:
             if i<data2:
-                pass
+                if curr.keys[-1]<data2:
+                    return(self._search(data2,curr.children[-1]))
             elif i==data2:
                 return(curr,curr.keys.index(i))
             else:
@@ -59,12 +60,40 @@ class BTree:
             self._insert(curr.keys[2],curr.parent)
             left=node()
             left.keys+=curr.keys[0:2]
+            left.parent=curr.parent
             right=node()
             right.keys.append(curr.keys[3])
+            right.parent=curr.parent
             curr.parent.children.insert(i,left)
             curr.parent.children.insert(i+1,right)
             curr.parent.leaf=False
-
+    def succ(self,data7):
+        curr,i=self.search(data7)
+        if curr.leaf is not True:
+            x=curr.children[i+1]
+            return(x.keys[0])
+        else:
+            if i<len(curr.keys):
+                return(curr.parent.keys[curr.parent.children.index(curr)])
+            else:
+                return(curr.keys[i+1])
+    def pred(self,data8):
+        curr,i=self.search(data8)
+        if curr.leaf is not True:
+            x=curr.children[i]
+            return(x.keys[-1])
+        else:
+            if i>0:
+                return(curr.keys[i-1])
+            else:
+                return(curr.parent.keys[curr.parent.children.index(curr)-1])
+    def delete(self,data9):
+        curr,i=self._search(data9)
+        if curr.leaf is True:
+            if len(curr.keys)>1:
+                curr.keys.pop(i)
+            else:
+                if curr.parent.children[i]
 b1=BTree()
 b1.insert(1)
 b1.insert(3)
@@ -84,4 +113,4 @@ b1.insert(12)
 #z=b1.root.children[2]
 #w=b1.root.children[3]
 #print(x.keys+['/']+y.keys+['/']+z.keys+['/']+w.keys)
-
+print(b1.succ(12))
